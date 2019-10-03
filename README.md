@@ -1,0 +1,2 @@
+# mazze
+dont get lost.
