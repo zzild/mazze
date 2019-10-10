@@ -30,7 +30,12 @@ let passages =  [
 
 // print the maze on console
 function print(s) {
-    // TODO: implement this method!
+   console.log(s.length);
+   let reapet = s.length
+   for(let counter = 0; counter < reapet; counter +=1 ){
+    console.log(s[counter])
+   }
+  
 }
 
 print(passages);
