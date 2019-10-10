@@ -33,7 +33,11 @@ function print(s) {
    console.log(s.length);
    let reapet = s.length
    for(let counter = 0; counter < reapet; counter +=1 ){
-    console.log(s[counter])
+    let reapet2 = s[counter].length  
+    for(let counter2 = 0; counter2 < reapet2; counter2 +=1){
+        process.stdout.write("" + s[counter][counter2])    
+    }
+    console.log("")
    }
   
 }
