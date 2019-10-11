@@ -27,20 +27,30 @@ let passages =  [
     [5, 10, 4, 15, 10, 6, 13, 13, 8, 1],
     [4, 13, 12, 9, 5, 13, 12, 12, 12, 8]
 ];
-
+function teste(s,x){
+    for(let counter3 = 0; counter3 < s[x].length; counter3++){
+        if (s[x][counter3]&1){
+            console.log("  ")
+    
+        }   else{
+            console.log("__")
+        } 
+    }
+}
 // print the maze on console
 function print(s) {
     console.log(" __________________")
    let reapet = s.length
    for(let counter = 0; counter < reapet; counter +=1 ){
-    let reapet2 = s[counter].length  
-    for(let counter2 = 0; counter2 < reapet2; counter2 +=1){
-        process.stdout.write("" + s[counter][counter2])    
+       teste(s, counter)
+  //  let reapet2 = s[counter].length  
+    //for(let counter2 = 0; counter2 < reapet2; counter2 +=1){
+      //  process.stdout.write("" + s[counter][counter2])    
     }
     console.log("")
    }
   
-}
+
 
 print(passages);
 
