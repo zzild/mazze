@@ -27,28 +27,74 @@ let passages =  [
     [5, 10, 4, 15, 10, 6, 13, 13, 8, 1],
     [4, 13, 12, 9, 5, 13, 12, 12, 12, 8]
 ];
-function teste(s,x){
+function teste1(s,x){
     for(let counter3 = 0; counter3 < s[x].length; counter3++){
-        if (s[x][counter3]&1){
-            process.stdout.write("  ")
+        
+        
+        if (x > 0){
+            if (s[x-1][counter3]&8){
+                process.stdout.write(" ")
     
+            }   else{
+                process.stdout.write("|")
+            } 
+        }  else{
+            process.stdout.write(" ")    
+        }
+        if (s[x][counter3]&1){
+                process.stdout.write("  ")
+        
         }   else{
-            process.stdout.write("__")
-        } 
+                process.stdout.write("__")
+        }    
     }
+    if (x > 0){
+        if (s[x][s[x].length - 1]&4){
+            process.stdout.write(" ")
+
+        }   else{
+            process.stdout.write("|")
+        }
+    }
+}
+function letztes(s, x){
+    for(let counter3 = 0; counter3 < s[x].length; counter3++){
+    
+    if (s[x][counter3]&8){
+        process.stdout.write(" ")
+
+    }   else{
+        process.stdout.write("|")
+    }
+    if (s[x][counter3]&2){
+        process.stdout.write("  ")
+
+    }   else{
+        process.stdout.write("__")
+    }
+}
+if (s[x][s[x].length - 1]&4){
+    process.stdout.write(" ")
+
+}   else{
+    process.stdout.write("|")
+}
 }
 // print the maze on console
 function print(s) {
     
    let reapet = s.length
-   for(let counter = 0; counter < reapet; counter +=1 ){
+   for(let counter = 0; counter + 1 < reapet; counter +=1 ){
        console.log("")
-        teste(s, counter)
+        teste1(s, counter)
+        
+        
   //  let reapet2 = s[counter].length  
     //for(let counter2 = 0; counter2 < reapet2; counter2 +=1){
       //  process.stdout.write("" + s[counter][counter2])    
     }
     console.log("")
+    letztes(s, reapet - 1)
    }
   
 
