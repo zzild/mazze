@@ -30,19 +30,20 @@ let passages =  [
 function teste(s,x){
     for(let counter3 = 0; counter3 < s[x].length; counter3++){
         if (s[x][counter3]&1){
-            console.log("  ")
+            process.stdout.write("  ")
     
         }   else{
-            console.log("__")
+            process.stdout.write("__")
         } 
     }
 }
 // print the maze on console
 function print(s) {
-    console.log(" __________________")
+    
    let reapet = s.length
    for(let counter = 0; counter < reapet; counter +=1 ){
-       teste(s, counter)
+       console.log("")
+        teste(s, counter)
   //  let reapet2 = s[counter].length  
     //for(let counter2 = 0; counter2 < reapet2; counter2 +=1){
       //  process.stdout.write("" + s[counter][counter2])    
