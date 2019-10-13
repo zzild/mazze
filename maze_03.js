@@ -71,7 +71,16 @@ function printMaze(s) {
 
 // initialize maze with walls at every cell
 function initializeMaze(rows, columns) {
-    // TODO
+var s = [];
+for (let z = 0; z < columns; z++){
+    var t = [];
+    for(let x = 0; x < rows; x++){
+               t.push(0)
+
+    }
+s.push(t)
+}
+    return s
 }
 
 // starting with cell s[i][j] carve a passage to s[i + 1][j] if possible
