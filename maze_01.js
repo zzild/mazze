@@ -85,7 +85,7 @@ if (s[x][s[x].length - 1]&4){
 function print(s) {
     
    let reapet = s.length
-   for(let counter = 0; counter + 1 < reapet; counter +=1 ){
+   for(let counter = 0; counter < reapet; counter +=1 ){
        console.log("")
         teste1(s, counter)
         
