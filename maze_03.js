@@ -84,30 +84,48 @@ s.push(t)
 }
 
 // starting with cell s[i][j] carve a passage to s[i + 1][j] if possible
-function carveDown(s, i, j) {
-    // TODO
+function carveBottom(s, i, j) {
+    if (i + 1 < (s.length)){
+        s[i][j] = s[i][j] + bottom
+        if (i != s.length - 1){
+        s[i+1][j] = s[i+1][j] + top    
+        
+        
+    }
+    }
 }
 
 // starting with cell s[i][j] carve a passage to s[i][j + 1] if possible
 function carveRight(s, i, j) {
-    // TODO
+if (j + 1 < (s[i].length)){
+    s[i][j] = s[i][j] + right
+    if (j != s[i].length - 1){
+    s[i][j+1] = s[i][j+1] + left    
+    
+    
 }
+}
+}
+
 
 // create maze by randomly carving passages for each cell
 function createBinaryTreeMaze(rows, columns) {
     let s = initializeMaze(rows, columns);
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < columns; j++) {
-            // TODO: randomly either carve down or right (if possible)
+            let randomized  = Math.floor((Math.random() + 0.5))
+            if (randomized === 1){
+            carveBottom(s, i, j)
+            } else {
+            carveRight(s, i, j)
+            } 
         }
     }
     return s;
 }
 
-let maze = initializeMaze(10, 10);
-printMaze(maze);
 
-/*
+
+
 let maze = createBinaryTreeMaze(10, 10);
 printMaze(maze);
-*/

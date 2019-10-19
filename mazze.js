@@ -1,6 +1,3 @@
-let $$ = "#"
-for(let counter = 0; counter < 7; counter += 1) {
-    console.log($$);
-    $$ = $$ + "#"    
-}
+ok = Math.floor(Math.random()*16)
+console.log(ok)
 
