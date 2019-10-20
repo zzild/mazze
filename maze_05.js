@@ -16,41 +16,32 @@ const LEFT   = 8;
 //    12 == right | left
 //     7 == top | bottom | right
 
-// print '   ' if cell has no top wall, else print ' __'
-function printTop(cell) {
-    process.stdout.write(cell & TOP ? '   ' : ' __');
-}
-
-// print '|' if cell has left wall and '__' if it has a bottom wall
-function printLeftBottom(cell) {
-    process.stdout.write(cell & LEFT ? ' ' : '|');
-    process.stdout.write(cell & BOTTOM ? '  ' : '__');
-}
-
-// print '|' if cell has right wall, else print ' '
-function printRight(cell) {
-    process.stdout.write(cell & RIGHT ? ' ' : '|');
-}
-
-// print maze described by passages on console
-function printMaze(s) {
+// return maze as string
+function toString(s) {
+    let lines = "";
     // print top walls of top row
     for (let j = 0; j < s[0].length; j++) {
-        printTop(s[0][j]);
+        lines += (s[0][j] & TOP ? '   ' : ' __');
     }
-    process.stdout.write("\n"); // print new line
-
+    lines += "\n"; // print new line
     // iterate over each row
     for (let i = 0; i < s.length; i++ ) {
         // print left and bottom wall for each cell of current row
         for (let j = 0; j < s[i].length; j++) {
-            printLeftBottom(s[i][j]);
+            lines += (s[i][j] & LEFT ? ' ' : '|');
+            lines += (s[i][j] & BOTTOM ? '  ' : '__');
         }
-
         // print right wall for last cell of row
-        printRight(s[i][s[i].length - 1]);
-        process.stdout.write("\n"); // print new line
+        lines += (s[i][s[i].length - 1] & RIGHT ? ' ' : '|');
+        lines += "\n"; // print new line
+
     }
+    return lines;
+}
+
+// print maze described by passages on console
+function printMaze(s) {
+    console.log(toString(s))
 }
 
 // initialize maze with walls at every cell
