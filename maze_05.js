@@ -101,7 +101,7 @@ function createBinaryTreeMaze(rows, columns) {
 
 // check if for the cells in *s* the row *i* and column *j* are valid values
 function notValid(s, i, j) {
-    return i >= 0 && i < s.length && j >= 0 && j < s[i].length;
+    return !(i >= 0 && i < s.length && j >= 0 && j < s[i].length);
 }
 
 // starting with cell s[i][j] carve a passage to s[i + 1][j] if possible and
@@ -109,7 +109,11 @@ function notValid(s, i, j) {
 // returns array of new coordinates
 function goBottomAndCarveIfSolid(s, i, j) {
     if (notValid(s, i + 1, j)) return [i, j];
-    // TODO carve if still solid ..
+    if (s[i + 1][j] === 0){
+        s[i][j] = s[i][j] + BOTTOM;
+        s[i + 1][j] = s[i + 1][j] + TOP;
+
+    }
     return [i + 1, j];
 }
 
@@ -118,7 +122,11 @@ function goBottomAndCarveIfSolid(s, i, j) {
 // returns array of new coordinates
 function goTopAndCarveIfSolid(s, i, j) {
     if (notValid(s, i - 1, j)) return [i, j];
-    // TODO carve if still solid ..
+    if (s[i -1][j] === 0){
+        s[i][j] = s[i][j] + TOP;
+        s[i -1][j] = s[i -1][j] + BOTTOM;
+
+    }
     return [i - 1, j];
 }
 
@@ -127,7 +135,11 @@ function goTopAndCarveIfSolid(s, i, j) {
 // returns array of new coordinates
 function goRightAndCarveIfSolid(s, i, j) {
     if (notValid(s, i, j + 1)) return [i, j];
-    // TODO carve if still solid ..
+    if (s[i][j + 1] === 0){
+        s[i][j] = s[i][j] + RIGHT;
+        s[i][j + 1] = s[i][j + 1] + LEFT;
+
+    }
     return [i, j + 1];
 }
 
@@ -136,7 +148,11 @@ function goRightAndCarveIfSolid(s, i, j) {
 // returns array of new coordinates
 function goLeftAndCarveIfSolid(s, i, j) {
     if (notValid(s, i, j - 1)) return [i, j];
-    // TODO carve if still solid ..
+    if (s[i][j - 1] === 0){
+        s[i][j] = s[i][j] + LEFT;
+        s[i][j - 1] = s[i][j - 1] + RIGHT;
+
+    }
     return [i, j - 1];
 }
 
@@ -149,9 +165,9 @@ function createAldousBroderMaze(rows, columns) {
     let s = initializeMaze(rows, columns);
     let i = 0; // current row
     let j = 0; // current column
-    for (let n = 0; n < 1000; n++) {
+    for (let n = 0; n < 10000; n++) {
         // TODO randomly choose a value from {0, 1, 2, 3}
-        let choice = 0;
+        let choice = Math.floor(Math.random()*4);
         switch (choice) {
             case 0:
                 [i, j] = goBottomAndCarveIfSolid(s, i, j);
