@@ -190,5 +190,5 @@ let maze = createBinaryTreeMaze(10, 10);
 printMaze(maze);
 
 
-maze = createAldousBroderMaze(10, 40);
+maze = createAldousBroderMaze(15, 15);
 printMaze(maze);
