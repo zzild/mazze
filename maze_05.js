@@ -16,6 +16,7 @@ const LEFT   = 8;
 //    12 == right | left
 //     7 == top | bottom | right
 
+// return maze as string
 function toString(s) {
     let lines = "";
     // print top walls of top row
@@ -99,7 +100,11 @@ function notValid(s, i, j) {
 // returns array of new coordinates
 function goBottomAndCarveIfSolid(s, i, j) {
     if (notValid(s, i + 1, j)) return [i, j];
-    // TODO carve if still solid ..
+    if (s[i + 1][j] === 0){
+        s[i][j] = s[i][j] + BOTTOM;
+        s[i + 1][j] = s[i + 1][j] + TOP;
+
+    }
     return [i + 1, j];
 }
 
@@ -108,7 +113,11 @@ function goBottomAndCarveIfSolid(s, i, j) {
 // returns array of new coordinates
 function goTopAndCarveIfSolid(s, i, j) {
     if (notValid(s, i - 1, j)) return [i, j];
-    // TODO carve if still solid ..
+    if (s[i -1][j] === 0){
+        s[i][j] = s[i][j] + TOP;
+        s[i -1][j] = s[i -1][j] + BOTTOM;
+
+    }
     return [i - 1, j];
 }
 
@@ -117,7 +126,11 @@ function goTopAndCarveIfSolid(s, i, j) {
 // returns array of new coordinates
 function goRightAndCarveIfSolid(s, i, j) {
     if (notValid(s, i, j + 1)) return [i, j];
-    // TODO carve if still solid ..
+    if (s[i][j + 1] === 0){
+        s[i][j] = s[i][j] + RIGHT;
+        s[i][j + 1] = s[i][j + 1] + LEFT;
+
+    }
     return [i, j + 1];
 }
 
@@ -126,7 +139,11 @@ function goRightAndCarveIfSolid(s, i, j) {
 // returns array of new coordinates
 function goLeftAndCarveIfSolid(s, i, j) {
     if (notValid(s, i, j - 1)) return [i, j];
-    // TODO carve if still solid ..
+    if (s[i][j - 1] === 0){
+        s[i][j] = s[i][j] + LEFT;
+        s[i][j - 1] = s[i][j - 1] + RIGHT;
+
+    }
     return [i, j - 1];
 }
 
@@ -139,9 +156,9 @@ function createAldousBroderMaze(rows, columns) {
     let s = initializeMaze(rows, columns);
     let i = 0; // current row
     let j = 0; // current column
-    for (let n = 0; n < 1000; n++) {
+    for (let n = 0; n < 10000; n++) {
         // TODO randomly choose a value from {0, 1, 2, 3}
-        let choice = 0;
+        let choice = Math.floor(Math.random()*4);
         switch (choice) {
             case 0:
                 [i, j] = goBottomAndCarveIfSolid(s, i, j);
@@ -164,5 +181,5 @@ let maze = createBinaryTreeMaze(10, 10);
 printMaze(maze);
 
 
-maze = createAldousBroderMaze(15, 15);
+maze = createAldousBroderMaze(10, 40);
 printMaze(maze);
