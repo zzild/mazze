@@ -16,41 +16,31 @@ const LEFT   = 8;
 //    12 == right | left
 //     7 == top | bottom | right
 
-// print '   ' if cell has no top wall, else print ' __'
-function printTop(cell) {
-    process.stdout.write(cell & TOP ? '   ' : ' __');
-}
-
-// print '|' if cell has left wall and '__' if it has a bottom wall
-function printLeftBottom(cell) {
-    process.stdout.write(cell & LEFT ? ' ' : '|');
-    process.stdout.write(cell & BOTTOM ? '  ' : '__');
-}
-
-// print '|' if cell has right wall, else print ' '
-function printRight(cell) {
-    process.stdout.write(cell & RIGHT ? ' ' : '|');
-}
-
-// print maze described by passages on console
-function printMaze(s) {
+function toString(s) {
+    let lines = "";
     // print top walls of top row
     for (let j = 0; j < s[0].length; j++) {
-        printTop(s[0][j]);
+        lines += (s[0][j] & TOP ? '   ' : ' __');
     }
-    process.stdout.write("\n"); // print new line
-
+    lines += "\n"; // print new line
     // iterate over each row
     for (let i = 0; i < s.length; i++ ) {
         // print left and bottom wall for each cell of current row
         for (let j = 0; j < s[i].length; j++) {
-            printLeftBottom(s[i][j]);
+            lines += (s[i][j] & LEFT ? ' ' : '|');
+            lines += (s[i][j] & BOTTOM ? '  ' : '__');
         }
-
         // print right wall for last cell of row
-        printRight(s[i][s[i].length - 1]);
-        process.stdout.write("\n"); // print new line
+        lines += (s[i][s[i].length - 1] & RIGHT ? ' ' : '|');
+        lines += "\n"; // print new line
+
     }
+    return lines;
+}
+
+// print maze described by passages on console
+function printMaze(s) {
+    console.log(toString(s))
 }
 
 // initialize maze with walls at every cell
@@ -109,11 +99,7 @@ function notValid(s, i, j) {
 // returns array of new coordinates
 function goBottomAndCarveIfSolid(s, i, j) {
     if (notValid(s, i + 1, j)) return [i, j];
-    if (s[i + 1][j] === 0){
-        s[i][j] = s[i][j] + BOTTOM;
-        s[i + 1][j] = s[i + 1][j] + TOP;
-
-    }
+    // TODO carve if still solid ..
     return [i + 1, j];
 }
 
@@ -122,11 +108,7 @@ function goBottomAndCarveIfSolid(s, i, j) {
 // returns array of new coordinates
 function goTopAndCarveIfSolid(s, i, j) {
     if (notValid(s, i - 1, j)) return [i, j];
-    if (s[i -1][j] === 0){
-        s[i][j] = s[i][j] + TOP;
-        s[i -1][j] = s[i -1][j] + BOTTOM;
-
-    }
+    // TODO carve if still solid ..
     return [i - 1, j];
 }
 
@@ -135,11 +117,7 @@ function goTopAndCarveIfSolid(s, i, j) {
 // returns array of new coordinates
 function goRightAndCarveIfSolid(s, i, j) {
     if (notValid(s, i, j + 1)) return [i, j];
-    if (s[i][j + 1] === 0){
-        s[i][j] = s[i][j] + RIGHT;
-        s[i][j + 1] = s[i][j + 1] + LEFT;
-
-    }
+    // TODO carve if still solid ..
     return [i, j + 1];
 }
 
@@ -148,11 +126,7 @@ function goRightAndCarveIfSolid(s, i, j) {
 // returns array of new coordinates
 function goLeftAndCarveIfSolid(s, i, j) {
     if (notValid(s, i, j - 1)) return [i, j];
-    if (s[i][j - 1] === 0){
-        s[i][j] = s[i][j] + LEFT;
-        s[i][j - 1] = s[i][j - 1] + RIGHT;
-
-    }
+    // TODO carve if still solid ..
     return [i, j - 1];
 }
 
@@ -165,9 +139,9 @@ function createAldousBroderMaze(rows, columns) {
     let s = initializeMaze(rows, columns);
     let i = 0; // current row
     let j = 0; // current column
-    for (let n = 0; n < 10000; n++) {
+    for (let n = 0; n < 1000; n++) {
         // TODO randomly choose a value from {0, 1, 2, 3}
-        let choice = Math.floor(Math.random()*4);
+        let choice = 0;
         switch (choice) {
             case 0:
                 [i, j] = goBottomAndCarveIfSolid(s, i, j);
