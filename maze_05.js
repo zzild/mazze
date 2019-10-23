@@ -177,9 +177,5 @@ function createAldousBroderMaze(rows, columns) {
     return s;
 }
 
-let maze = createBinaryTreeMaze(10, 10);
-printMaze(maze);
 
 
-maze = createAldousBroderMaze(10, 40);
-printMaze(maze);

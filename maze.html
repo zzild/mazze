@@ -61,9 +61,11 @@
         }
         console.log('rows: '+ rows);
         console.log('columns: '+ columns);
-        document.getElementById("rows").value = rows;
+        document.getElementById("rows").value = rows; 
         document.getElementById("columns").value = columns;
-        document.getElementById("maze").innerHTML = '<p><b>TODO</b> integrate maze here!</p>';
+        let maze = createAldousBroderMaze(rows, columns);
+        printMaze(maze);
+        document.getElementById("maze").innerHTML = "<pre>" + toString(maze) + "</pre>";
     </script>
 </body>
 </html>
